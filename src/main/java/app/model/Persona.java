@@ -1,19 +1,16 @@
+
 package app.model;
 
-import java.util.List;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.OneToMany;
 
-@Entity
-@Table(name = "socio")
-public class Socio implements Serializable {
-
+public class Persona implements Serializable{
+    
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -43,9 +40,9 @@ public class Socio implements Serializable {
     @OneToMany(mappedBy = "socio", fetch = FetchType.LAZY)
     private List<SolicitudAlquiler> solicitudAlquiler;
 
-    public Socio() {}
+    public Persona() {}
 
-    public Socio(Long id) {
+    public Persona(Long id) {
         this.id = id;
     }
 
@@ -120,4 +117,5 @@ public class Socio implements Serializable {
     public void setSolicitudAlquiler(List<SolicitudAlquiler> solicitudAlquiler) {
         this.solicitudAlquiler = solicitudAlquiler;
     }
+    
 }
