@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class SolicitudAlquilerDAOH extends BaseHibernateDAO implements SolicitudAlquilerDAO {
 
     public List<SolicitudAlquiler> list() {
-        Criteria criteria = this.getSession().createCriteria(Socio.class);
+        Criteria criteria = this.getSession().createCriteria(SolicitudAlquiler.class);
         return criteria.list();
     }
 

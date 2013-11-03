@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UsuarioRolDAOH extends BaseHibernateDAO implements UsuarioRolDAO {
 
     public List<UsuarioRol> list() {
-        Criteria criteria = this.getSession().createCriteria(Socio.class);
+        Criteria criteria = this.getSession().createCriteria(UsuarioRol.class);
         return criteria.list();
     }
 

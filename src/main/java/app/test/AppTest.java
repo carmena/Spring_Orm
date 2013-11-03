@@ -24,7 +24,8 @@ public class AppTest {
         //AppTest.addCampo();AppTest.listCampo(); AppTest.deleteCampo();AppTest.updateCampo();AppTest.getCampo(); AppTest.addCampo();
         //AppTest.getServico(); AppTest.deleteServicio();AppTest.addServicio(); AppTest.listServicio();
         // AppTest.listSocio();AppTest.addSocio();
-        AppTest.addUsuario();//
+        //AppTest.addUsuario();
+        AppTest.listUsuario();
     }
     public static void addUsuario() {
         ApplicationContext context = new ClassPathXmlApplicationContext("database.xml");
@@ -43,6 +44,16 @@ public class AppTest {
 
         System.out.println(usuario.getId() + " " + usuario.getPersona().getPaterno());
     }
+       public static void listUsuario() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("database.xml");
+        UsuarioDAO usuarioDAO = (UsuarioDAO) context.getBean("usuarioDAO");
+
+        List<Usuario> usuarios = usuarioDAO.list();
+        for (Usuario usuario : usuarios) {
+            System.out.println(usuario.getId() + " " + usuario.getUsuario());
+        }
+    }
+    
     public static void listSocio() {
         ApplicationContext context = new ClassPathXmlApplicationContext("database.xml");
         SocioDAO socioDAO = (SocioDAO) context.getBean("socioDAO");
@@ -168,7 +179,7 @@ public class AppTest {
         persona.setNombres("Carmen");
         persona.setPaterno("Asencio");
         persona.setMaterno("Quesquen");
-        persona.setMaterno("carmenasencioquesquen@gmail.com");
+        persona.setEmail("carmenasencioquesquen@gmail.com");
         personaDAO.save(persona);
         System.out.println(persona.getId() + " " + persona.getPaterno());
     }
