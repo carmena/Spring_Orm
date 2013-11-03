@@ -31,6 +31,8 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "id_persona")
     private Persona persona;
 
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private List<UsuarioRol> usuario_rol;
     
      public Usuario() {
          
