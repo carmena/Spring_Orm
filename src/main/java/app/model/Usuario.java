@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,18 +31,18 @@ public class Usuario implements Serializable {
     @Column(name = "estado")
     private Long estado;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_persona")
     private Persona persona;
-
+    
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<UsuarioRol> usuario_rol;
-    
-     public Usuario() {
-         
-     }
-     public Usuario(Long id) {
-        this.id =id;
+
+    public Usuario() {
+    }
+
+    public Usuario(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -91,6 +92,4 @@ public class Usuario implements Serializable {
     public void setUsuario_rol(List<UsuarioRol> usuario_rol) {
         this.usuario_rol = usuario_rol;
     }
-   
-    
 }

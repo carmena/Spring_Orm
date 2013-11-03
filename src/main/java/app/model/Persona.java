@@ -38,7 +38,7 @@ public class Persona implements Serializable {
     @OneToOne(mappedBy = "persona", fetch = FetchType.LAZY)
     private Socio socio;
     
-    @OneToMany(mappedBy = "persona", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "persona", fetch = FetchType.LAZY)
     private List<Usuario> usuario;
 
     public Persona(){     
