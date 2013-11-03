@@ -1,7 +1,7 @@
 package app.model;
 
-import java.util.List;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,27 +9,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "socio")
-public class Socio implements Serializable {
+@Table(name = "usuario")
+public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue
     @Column(name = "id")
     private Long id;
     
+    @Column(name = "usuario")
+    private String usuario;
+    
+    @Column(name = "password")
+    private String password;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_persona")
-    
     private Persona persona;
 
-    public Socio() {
-    }
-    public Socio(Long id) {
+    
+     public Usuario() {
+         
+     }
+     public Usuario(Long id) {
         this.id =id;
     }
     public Long getId() {
@@ -40,6 +46,22 @@ public class Socio implements Serializable {
         this.id = id;
     }
 
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public Persona getPersona() {
         return persona;
     }
@@ -47,4 +69,7 @@ public class Socio implements Serializable {
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
+    
+  
+    
 }

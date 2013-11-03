@@ -99,8 +99,5 @@ public class Local implements Serializable {
         this.campo = campo;
     }
 
-
-
-    
     
 }

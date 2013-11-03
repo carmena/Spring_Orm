@@ -18,26 +18,56 @@ public class AppTest {
 
     public static void main(String[] args) {
         //AppTest.deleteLocal(); AppTest.updateLocal();AppTest.addLocal(); AppTest.listLocal();AppTest.getLocal();
-        AppTest.addPersona(); //AppTest.updateLocal();AppTest.addLocal(); AppTest.listLocal();AppTest.getLocal();
+       // AppTest.addPersona();  AppTest.updatePersona();AppTest.getPersona(); AppTest.listPersona();
+        AppTest.getLocal();
+        
         //AppTest.getAll();
-        //AppTest.addCampo();
+       // AppTest.addCampo();
         //AppTest.addCampo();
         //AppTest.listCampo();
     }
 
 
-    public static void deleteSocio() {
-        
-    }
+      public static void listPersona() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("database.xml");
 
+        PersonaDAO personaDAO = (PersonaDAO) context.getBean("personaDAO");
+        List<Persona> personas = personaDAO.list();
+        for (Persona persona : personas) {
+
+            System.out.println(persona.getNombres()+ " " + persona.getMaterno());
+        }
+    }
+       public static void getPersona() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("database.xml");
+        PersonaDAO personaDAO = (PersonaDAO) context.getBean("personaDAO");
+        Persona persona = personaDAO.get(new Persona(1L));
+        System.out.println(persona.getId() + " " + persona.getNombres());
+    }
+        public static void updatePersona() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("database.xml");
+        PersonaDAO personaDAO = (PersonaDAO) context.getBean("personaDAO");
+        Persona persona = new Persona();
+        persona.setId(1L);
+        persona.setNombres("Carmen");
+        persona.setMaterno("Asencio");
+        persona.setPaterno("Quesquen");
+        persona.setDireccion("Callao");
+        persona.setCelular("968835659");
+        
+        persona.setEmail("carmenasencioquesquen@gmail.com");
+        personaDAO.update(persona);
+
+    }
     
        public static void addPersona() {
         ApplicationContext context = new ClassPathXmlApplicationContext("database.xml");
         PersonaDAO personaDAO =  (PersonaDAO) context.getBean("personaDAO");
         Persona persona = new Persona();
+        persona.setNombres("Carmen");
         persona.setPaterno("Asencio");
         persona.setMaterno("Quesquen");
-        persona.setNombres("Carmen");
+        persona.setMaterno("carmenasencioquesquen@gmail.com");
         personaDAO.save(persona);
         System.out.println(persona.getId() + " " + persona.getPaterno());
     }
@@ -121,7 +151,7 @@ public class AppTest {
 
         Campo campo = new Campo();
         campo.setCostoHora(12D);
-        campo.setDescripcion("Campos de Voley");
+        campo.setDescripcion("Campos de Ludo");
         //campo.setEstado(1);
         campo.setLocal(local);
         campo.setTipo(1);

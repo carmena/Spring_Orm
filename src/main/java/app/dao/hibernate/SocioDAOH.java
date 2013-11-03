@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository("socioDAO")
 public class SocioDAOH extends BaseHibernateDAO implements SocioDAO {
@@ -23,14 +24,17 @@ public class SocioDAOH extends BaseHibernateDAO implements SocioDAO {
         return (Socio) criteria.uniqueResult();
     }
 
+    @Transactional
     public void save(Socio t) {
         this.getSession().save(t);
     }
 
+    @Transactional
     public void update(Socio t) {
         this.getSession().update(t);
     }
 
+    @Transactional
     public void delete(Socio t) {
         this.getSession().delete(t);
     }
