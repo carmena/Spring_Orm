@@ -37,10 +37,6 @@ public class UsuarioRol {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getAuthority() {
         return authority;
     }
@@ -56,6 +52,8 @@ public class UsuarioRol {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+   
     
     
 }

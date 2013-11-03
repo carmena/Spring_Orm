@@ -2,6 +2,7 @@ package app.dao.hibernate;
 
 import app.dao.BaseHibernateDAO;
 import app.dao.SolicitudAlquilerDAO;
+import app.model.Campo;
 import app.model.Socio;
 import app.model.SolicitudAlquiler;
 import app.model.UsuarioRol;
@@ -18,7 +19,7 @@ public class SolicitudAlquilerDAOH extends BaseHibernateDAO implements Solicitud
         Criteria criteria = this.getSession().createCriteria(SolicitudAlquiler.class);
         return criteria.list();
     }
-
+    
     public SolicitudAlquiler get(SolicitudAlquiler t) {
         Criteria criteria = this.getSession().createCriteria(UsuarioRol.class);
         criteria.add(Restrictions.eq("id", t.getId()));
@@ -38,5 +39,13 @@ public class SolicitudAlquilerDAOH extends BaseHibernateDAO implements Solicitud
     @Transactional
     public void delete(SolicitudAlquiler t) {
         this.getSession().delete(t);
+    }
+
+    public List<SolicitudAlquiler> SolicitudAlquiler(Integer campo) {
+         Criteria criteria = (Criteria) this.getSession().createCriteria(SolicitudAlquiler.class)
+        .createAlias("solicitud_alquiler", "sol_alq", Criteria.LEFT_JOIN, Restrictions.like("sol_alq.id_campo", "1") ).list();
+        //   .addOrder(Order.asc("mt.age"))
+
+          return criteria.list();
     }
 }

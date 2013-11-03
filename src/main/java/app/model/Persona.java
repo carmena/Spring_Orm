@@ -39,7 +39,7 @@ public class Persona implements Serializable {
     private Socio socio;
     
     @OneToOne(mappedBy = "persona", fetch = FetchType.LAZY)
-    private List<Usuario> usuario;
+    private Usuario usuario;
 
     public Persona(){     
     }
@@ -47,6 +47,7 @@ public class Persona implements Serializable {
     public Persona(Long id) {
         this.id =id;
     }
+
     public Long getId() {
         return id;
     }
@@ -119,13 +120,16 @@ public class Persona implements Serializable {
         this.socio = socio;
     }
 
-    public List<Usuario> getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(List<Usuario> usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+  
+    
     
 
     

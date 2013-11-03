@@ -92,4 +92,5 @@ public class Usuario implements Serializable {
     public void setUsuario_rol(List<UsuarioRol> usuario_rol) {
         this.usuario_rol = usuario_rol;
     }
+
 }

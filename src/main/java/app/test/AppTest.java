@@ -5,12 +5,14 @@ import app.dao.LocalDAO;
 import app.dao.PersonaDAO;
 import app.dao.ServicioDAO;
 import app.dao.SocioDAO;
+import app.dao.SolicitudAlquilerDAO;
 import app.dao.UsuarioDAO;
 import app.model.Campo;
 import app.model.Local;
 import app.model.Persona;
 import app.model.Servicio;
 import app.model.Socio;
+import app.model.SolicitudAlquiler;
 import app.model.Usuario;
 import java.util.List;
 import org.springframework.context.ApplicationContext;
@@ -24,9 +26,18 @@ public class AppTest {
         //AppTest.getServico(); AppTest.deleteServicio();AppTest.addServicio(); AppTest.listServicio();
         // AppTest.listSocio();AppTest.addSocio();
         //AppTest.addUsuario();
-        AppTest.listUsuario();
+        AppTest.lisAlquierPorCampo();
     }
-    
+      public static void lisAlquierPorCampo() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("database.xml");
+        SolicitudAlquilerDAO solicitudAlquilerDAO = (SolicitudAlquilerDAO) context.getBean("solicitudAlquilerDAO");
+        List<SolicitudAlquiler> solicitudAlquileres = solicitudAlquilerDAO.SolicitudAlquiler(1);
+         for (SolicitudAlquiler solicitudAlquiler : solicitudAlquileres) {
+             System.out.println(solicitudAlquiler.getId() + " " + solicitudAlquiler.getServicios());
+         }
+        
+     
+      }
     public static void addUsuario() {
         ApplicationContext context = new ClassPathXmlApplicationContext("database.xml");
         UsuarioDAO usuarioDAO = (UsuarioDAO) context.getBean("usuarioDAO");

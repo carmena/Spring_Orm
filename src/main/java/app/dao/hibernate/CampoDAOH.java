@@ -3,8 +3,10 @@ package app.dao.hibernate;
 import app.dao.BaseHibernateDAO;
 import app.dao.CampoDAO;
 import app.model.Campo;
+import app.model.Local;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,4 +41,17 @@ public class CampoDAOH extends BaseHibernateDAO implements CampoDAO {
         this.getSession().delete(t);
     }
 
+    public List<Campo> allByLocal(Local local) {
+        Criteria criteria = this.getSession().createCriteria(Campo.class);
+        criteria.add(Restrictions.eq("local", local));
+        return criteria.list();
+    }
+
+    public Campo fillByName(String descripcion) {
+        Criteria criteria = this.getSession().createCriteria(Campo.class);
+        criteria.add(Restrictions.like("descripcion", descripcion, MatchMode.ANYWHERE));
+        return (Campo) criteria.uniqueResult();
+    }
+
+   
 }
