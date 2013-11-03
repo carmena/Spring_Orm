@@ -27,6 +27,9 @@ public class Usuario implements Serializable {
     @Column(name = "password")
     private String password;
     
+    @Column(name = "estado")
+    private Long estado;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_persona")
     private Persona persona;
@@ -40,6 +43,7 @@ public class Usuario implements Serializable {
      public Usuario(Long id) {
         this.id =id;
     }
+
     public Long getId() {
         return id;
     }
@@ -64,6 +68,14 @@ public class Usuario implements Serializable {
         this.password = password;
     }
 
+    public Long getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Long estado) {
+        this.estado = estado;
+    }
+
     public Persona getPersona() {
         return persona;
     }
@@ -71,7 +83,14 @@ public class Usuario implements Serializable {
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
-    
-  
+
+    public List<UsuarioRol> getUsuario_rol() {
+        return usuario_rol;
+    }
+
+    public void setUsuario_rol(List<UsuarioRol> usuario_rol) {
+        this.usuario_rol = usuario_rol;
+    }
+   
     
 }

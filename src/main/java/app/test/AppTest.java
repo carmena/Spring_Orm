@@ -5,11 +5,13 @@ import app.dao.LocalDAO;
 import app.dao.PersonaDAO;
 import app.dao.ServicioDAO;
 import app.dao.SocioDAO;
+import app.dao.UsuarioDAO;
 import app.model.Campo;
 import app.model.Local;
 import app.model.Persona;
 import app.model.Servicio;
 import app.model.Socio;
+import app.model.Usuario;
 import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -20,13 +22,28 @@ public class AppTest {
         //AppTest.deleteLocal(); AppTest.updateLocal();AppTest.addLocal(); AppTest.listLocal();AppTest.getLocal();
         // AppTest.addPersona();  AppTest.updatePersona();AppTest.getPersona(); AppTest.listPersona(); AppTest.deletePersona();
         //AppTest.addCampo();AppTest.listCampo(); AppTest.deleteCampo();AppTest.updateCampo();AppTest.getCampo(); AppTest.addCampo();
-          //AppTest.getServico(); AppTest.deleteServicio();AppTest.addServicio(); AppTest.listServicio();
-       // AppTest.listSocio();AppTest.addSocio();
-    
-        
-        //
+        //AppTest.getServico(); AppTest.deleteServicio();AppTest.addServicio(); AppTest.listServicio();
+        // AppTest.listSocio();AppTest.addSocio();
+        AppTest.addUsuario();//
     }
-      public static void listSocio() {
+    public static void addUsuario() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("database.xml");
+        UsuarioDAO usuarioDAO = (UsuarioDAO) context.getBean("usuarioDAO");
+        PersonaDAO personaDAO = (PersonaDAO) context.getBean("personaDAO");
+
+        Persona persona = personaDAO.get(new Persona(1L));
+
+        Usuario usuario = new Usuario();
+        usuario.setUsuario("carmen");
+        usuario.setPassword("123");
+        usuario.setEstado(1L);
+        usuario.setPersona(persona);
+
+        usuarioDAO.save(usuario);
+
+        System.out.println(usuario.getId() + " " + usuario.getPersona().getPaterno());
+    }
+    public static void listSocio() {
         ApplicationContext context = new ClassPathXmlApplicationContext("database.xml");
         SocioDAO socioDAO = (SocioDAO) context.getBean("socioDAO");
 
@@ -35,6 +52,7 @@ public class AppTest {
             System.out.println(socio.getId() + " " + socio.getPersona().getNombres());
         }
     }
+
     public static void addSocio() {
         ApplicationContext context = new ClassPathXmlApplicationContext("database.xml");
         SocioDAO socioDAO = (SocioDAO) context.getBean("socioDAO");
@@ -42,16 +60,15 @@ public class AppTest {
 
         Persona persona = personaDAO.get(new Persona(1L));
 
-       Socio socio = new Socio();
+        Socio socio = new Socio();
         socio.setPersona(persona);
 
         socioDAO.save(socio);
 
         System.out.println(socio.getId() + " " + socio.getPersona().getPaterno());
     }
-   
-       
-     public static void getServico() {
+
+    public static void getServico() {
         ApplicationContext context = new ClassPathXmlApplicationContext("database.xml");
         ServicioDAO servicioDAO = (ServicioDAO) context.getBean("servicioDAO");
         Servicio servicio = servicioDAO.get(new Servicio(2L));
@@ -73,6 +90,7 @@ public class AppTest {
         personaDAO.update(persona);
 
     }
+
     public static void addServicio() {
         ApplicationContext context = new ClassPathXmlApplicationContext("database.xml");
         ServicioDAO servicioDAO = (ServicioDAO) context.getBean("servicioDAO");
@@ -82,6 +100,7 @@ public class AppTest {
         servicioDAO.save(servicio);
         System.out.println(servicio.getId() + " " + servicio.getDescripcion());
     }
+
     public static void listServicio() {
         ApplicationContext context = new ClassPathXmlApplicationContext("database.xml");
 
@@ -91,13 +110,15 @@ public class AppTest {
             System.out.println(servicio.getDescripcion() + " " + servicio.getCostoHora());
         }
     }
-  public static void deleteServicio() {
+
+    public static void deleteServicio() {
         ApplicationContext context = new ClassPathXmlApplicationContext("database.xml");
         ServicioDAO servicioDAO = (ServicioDAO) context.getBean("servicioDAO");
         Servicio servicio = new Servicio();
         servicio.setId(1L);
         servicioDAO.delete(servicio);
     }
+
     public static void deletePersona() {
         ApplicationContext context = new ClassPathXmlApplicationContext("database.xml");
         PersonaDAO personaDAO = (PersonaDAO) context.getBean("personaDAO");
